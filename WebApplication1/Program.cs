@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Atlas.AspNetCore.Server.Kestrel.Transport.Pipelines;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv;
-using Atlas.AspNetCore.Server.Kestrel.Transport.Streams;
-using Microsoft.Extensions.Options;
-using System.Net;
 
 namespace WebApplication1
 {
@@ -24,7 +14,8 @@ namespace WebApplication1
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseStreamTransport()
-                .Build();
+				//.UseStreamTransport()
+	            .UsePipelineTransport()
+				.Build();
     }
 }

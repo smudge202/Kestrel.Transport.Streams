@@ -1,6 +1,6 @@
-﻿using Atlas.AspNetCore.Server.Kestrel.Transport.Streams;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
+using Atlas.AspNetCore.Server.Kestrel.Transport.Pipelines;
 
 namespace WebApplication1.Pages
 {
@@ -8,10 +8,7 @@ namespace WebApplication1.Pages
     {
         public string Message { get; set; }
 
-        public async Task OnGetAsync()
-        {
-            var connection = StreamTransport.CreateConnection();
-            this.Message = await connection.Get("/contact");
-        }
+        public async Task OnGetAsync() 
+	        => Message = await Pipeline.GetAsync("/", HttpContext.RequestAborted);
     }
 }
